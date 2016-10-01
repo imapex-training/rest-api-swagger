@@ -1,6 +1,6 @@
-# Introduction
+# Introduction and Purpose
 
-Building a REST API using Swagger
+The purpose of this tutorial is to help the reader understand a method to quickly create a REST API, and to understand the process of creating an API starting first with the API definintion.  We will use the Swagger definition language (aka the OpenAPI Specification) in this tutorial.
 
 ## Windows Users
 
@@ -135,6 +135,28 @@ Do not terminate this process or close this window until finished editing.
 [item]: # (slide)
 ![](https://github.com/swagger-api/swagger-node/raw/master/docs/images/overview2.png)
 (Source: Swagger-node project)
+
+[item]: # (/slide)
+
+It's important to realize that the Swagger file is the focal point of the process.  You are working in an API-definition-first model, and adding business logic to your code as a result of what you define in the Swagger file.
+
+[item]: # (slide)
+## Swagger file details
+[item]: # (/slide)
+In order to effectively work with the Swagger definition, it's useful to know more about the relevant parts of the file.  If you want to learn about all of the possible options in a Swagger specification, you can go [here]()
+
+[item]: # (slide)
+Beginning section: Before defining the methods of your API, the Swagger file can provide some overall information about your API including: The Swagger version, `info`, `host`, `basePath`, `schemes`, `consumes`, and `produces`.
+
+[item]: # (/slide)
+
+[item]: # (slide)
+`paths` section: This section describes the REST API paths that your application will expose to the world.  
+
+[item]: # (/slide)
+[item]: # (slide)
+`definitions` section: This section describes the objects that will be sent into your API methods or returned by your API methods.  It is used by the swagger "middleware" to validate what is being provided to and returned from the API.
+
 [item]: # (/slide)
 
 # Step 5: Creating a new API
@@ -145,8 +167,16 @@ Do not terminate this process or close this window until finished editing.
 
 # Step 8: Bonus: Docker Makefile
 
+# Go do it Exercises
+
+* The API doesn't have a notion of persistance.  Using the mongoose ORM, try to add database connectivity to the application.
+* 
 
 
 # Links to Explore
 
 * https://swaggerhub.com
+
+# License
+
+Unless noted otherwise, this tutorial is provided under the [CC-BY-3.0](https://creativecommons.org/licenses/by/3.0/) license, and any sample code is licensed under [Apache 2.0](LICENSE.md).
