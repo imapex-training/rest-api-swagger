@@ -1,6 +1,6 @@
 # Introduction and Purpose
 
-The purpose of this tutorial is to help the reader understand a method to quickly create a REST API, and to understand the process of creating an API starting first with the API definintion.  We will use the Swagger definition language (aka the OpenAPI Specification) in this tutorial.
+The purpose of this tutorial is to help the reader understand a method to quickly create a REST API, and to understand the process of creating an API starting first with the API definintion.  We will use the Swagger definition language (aka the [OpenAPI Specification](http://swagger.io/specification/)) in this tutorial.
 
 ## Windows Users
 
@@ -143,23 +143,64 @@ It's important to realize that the Swagger file is the focal point of the proces
 [item]: # (slide)
 ## Swagger file details
 [item]: # (/slide)
-In order to effectively work with the Swagger definition, it's useful to know more about the relevant parts of the file.  If you want to learn about all of the possible options in a Swagger specification, you can go [here]()
+In order to effectively work with the Swagger definition, it's useful to know more about the relevant parts of the file.  If you want to learn about all of the possible options in an OpenAPI specification, you can go [here](http://swagger.io/specification/).  OpenAPI files can be in JSON or [YAML format](http://yaml.org).  The format that we will work in is YAML.  If you're not familiar with YAML, it's a key-value based file format that is easy to read for humans.
 
 [item]: # (slide)
-Beginning section: Before defining the methods of your API, the Swagger file can provide some overall information about your API including: The Swagger version, `info`, `host`, `basePath`, `schemes`, `consumes`, and `produces`.
+Beginning section: Everything stems from the root "Swagger object".  Before defining the methods of your API, the Swagger file can provide some overall information about your API including: The Swagger version, `info`, `host`, `basePath`, `schemes`, `consumes`, and `produces`.
 
 [item]: # (/slide)
 
 [item]: # (slide)
-`paths` section: This section describes the REST API paths that your application will expose to the world.  
+`paths` section: This object describes the REST API paths that your application will expose to the world.
 
 [item]: # (/slide)
 [item]: # (slide)
-`definitions` section: This section describes the objects that will be sent into your API methods or returned by your API methods.  It is used by the swagger "middleware" to validate what is being provided to and returned from the API.
+`definitions` section: This object describes the objects that will be sent into your API methods or returned by your API methods.  It is used by the swagger "middleware" to validate what is being provided to and returned from the API.
 
 [item]: # (/slide)
 
+[item]: # (slide)
 # Step 5: Creating a new API
+[item]: # (/slide)
+
+Notice that there is an existing endpoint called `/hello`, also called a "path object".  It includes an "operation object" , `get`, which contains two fields: `parameters` and `responses`. 
+
+```
+paths:
+  /hello:
+    get:
+    		...
+    	parameters:
+    		...
+    	responses:
+    		...
+```
+
+Let's add a new API.  In the Swagger editor, which should be a tab in your open web browser already, add a new API called `/restaurants`.
+
+![](docs/create-new-api-1.png)
+
+Once you have added the `path` named `/restaurants:`, hit RETURN, and then TAB.  
+
+![](docs/create-new-api-2.png)
+
+Start typing the word `get`.  You'll noticed that you are presented with an autocomplete option.  Hit TAB to autocomplete the snippet.
+
+![](docs/create-new-api-3.png)
+
+This is great, however there are a couple of errors to resolve.
+
+Add some text to the `summary` and `description` fields.
+
+```
+  /restaurants:
+    get:
+      summary: Displays all of the restaurants available
+      description: Displays all of the restaurants available.  These restaurants are fantastic.
+      responses:
+        200:
+          description: OK
+```
 
 # Step 6: Wiring up the controller
 
