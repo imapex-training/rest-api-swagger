@@ -19,12 +19,16 @@ produces:
   - application/json
 paths:
   /restaurants:
+    x-swagger-router-controller: restaurants
     get:
       summary: Displays all of the restaurants available
       description: Displays all of the restaurants available.  These restaurants are fantastic.
+      operationId: index
       responses:
         200:
-          description: OK
+          description: An array of restaurants
+          schema:
+            $ref: "#/definitions/Restaurants"
   /hello:
     # binds a127 app logic to a route
     x-swagger-router-controller: hello_world
@@ -53,6 +57,15 @@ paths:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
+  Restaurants:
+    items:
+      $ref: "#/definitions/Restaurant"
+  Restaurant:
+    properties:
+      name:
+        type: string
+      address:
+        type: string      
   HelloWorldResponse:
     required:
       - message

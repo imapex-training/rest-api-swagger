@@ -160,11 +160,21 @@ Beginning section: Everything stems from the root "Swagger object".  Before defi
 [item]: # (/slide)
 
 [item]: # (slide)
+## Step 4: Summary
+
+* Learned about the basics of a Swagger file
+* Learned about YAML
+* Learned about `paths` and `definitions` sections
+
+[item]: # (/slide)
+
+[item]: # (slide)
 # Step 5: Creating a new API
 [item]: # (/slide)
 
 Notice that there is an existing endpoint called `/hello`, also called a "path object".  It includes an "operation object" , `get`, which contains two fields: `parameters` and `responses`. 
 
+[item]: # (slide)
 ```
 paths:
   /hello:
@@ -175,6 +185,7 @@ paths:
     	responses:
     		...
 ```
+[item]: # (/slide)
 
 Let's add a new API.  In the Swagger editor, which should be a tab in your open web browser already, add a new API called `/restaurants`.
 
@@ -190,6 +201,7 @@ Start typing the word `get`.  You'll noticed that you are presented with an auto
 
 This is great, however there are a couple of errors to resolve.
 
+[item]: # (slide)
 Add some text to the `summary` and `description` fields.
 
 ```
@@ -201,8 +213,105 @@ Add some text to the `summary` and `description` fields.
         200:
           description: OK
 ```
+[item]: # (/slide)
 
+[item]: # (slide)
+## Step 5: Summary
+
+* Learned about the basic elements of adding a path to the Swagger file
+* Added a `/restaurants` path to the Swagger file using snippet
+
+[item]: # (/slide)
+
+[item]: # (slide)
 # Step 6: Wiring up the controller
+[item]: # (/slide)
+
+At this point, you have an API displaying in the Swagger editor, but it doesn't do anything.  If you use the Swagger editor to try it out, you'll just get an error.
+
+In order for your REST API to do something interesting, you need to wire it to a controller.  The Swagger spec defines an `operationId` field, and the swagger-node project has extended the Swagger spec to also include a reference to the controller via the `x-swagger-router-controller` field.
+
+[item]: # (slide)
+Add the following to your Swagger file:
+
+* `x-swagger-router-controller: restaurants`
+* `operationId: index`
+
+[item]: # (/slide)
+
+The next step is to create the controller in your project.
+
+In the terminal, and within your project (`rest-api-swagger`), create a file named `restaurants.js` in the path `api/controllers/`.
+
+Open `restaurants.js` in a text editor.  Recall that in the Swagger file, there were two fields: `x-swagger-router-controller` and `operationId`.  We've already created the controller file, now we need to complete the `operationId`.  Since the value of the `operationId` corresponds to `index`, we need to add a function called `index` in `restaurants.js`.
+
+Copy the content below into `restaurants.js`.
+
+
+```
+'use strict'
+
+
+module.exports = {
+    index: index
+};
+
+function index(req, res) {
+
+    var restaurants = [
+	{
+	    name: 'Bar Americano',
+	    address: '20 Presgrave Pl, Melbourne VIC 3000, Australia'
+	},
+	{
+	    name: 'Ronchi 78',
+	    address: 'Via S. Maurilio, 7, 20123 Milano, Italy'
+	}
+    ];
+    
+    res.json(restaurants);
+}
+```
+
+If you try to execute the API, however, you'll receive an error in your terminal:
+
+`Error: Response validation failed: void does not allow a value`
+
+This is because our Swagger file does not include a definition for the resulting object, and so it's rejecting the result.
+
+To address this, we must define a schema definition for the restaurants object the `index` is sending back to the server.
+
+```
+      responses:
+        200:
+          description: An array of restaurants
+          schema:
+            $ref: "#/definitions/Restaurants"
+```
+
+```
+definitions:
+  Restaurants:
+    items:
+      $ref: "#/definitions/Restaurant"
+  Restaurant:
+    properties:
+      name:
+        type: string
+      address:
+        type: string 
+```
+
+[item]: # (slide)
+## Step 6 Summary
+
+* Added `x-swagger-router-controller: restaurants`
+* Added `operationId: index`
+* Added `api/controllers/restaurants.js`
+* Added `function index({})` to `restaurants.js`
+* Added object definitions to Swagger file
+
+[item]: # (/slide)
 
 # Step 7: Deploying into Docker
 
