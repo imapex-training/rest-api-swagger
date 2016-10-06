@@ -82,6 +82,16 @@ Focusing our attention on `controllers` and `swagger`:
 ```
 
 [item]: # (slide)
+## Step 2: Summary
+
+* Learned about the `swagger-node` project
+* Learned about the project layout
+* `controllers` directory
+* `swagger` directory
+
+[item]: # (/slide)
+
+[item]: # (slide)
 # Step 3: Run the project
 
 
@@ -127,6 +137,15 @@ Do not terminate this process or close this window until finished editing.
 ```
 
 ![Editor](docs/editor.png)
+
+[item]: # (slide)
+## Step 3: Summary
+
+* Learned about the `swagger-node` project
+* `swagger project start`
+* `swagger project edit`
+
+[item]: # (/slide)
 
 [item]: # (slide)
 # Step 4: Understand the project and development process
@@ -187,6 +206,8 @@ paths:
 ```
 [item]: # (/slide)
 
+## Exercise
+
 Let's add a new API.  In the Swagger editor, which should be a tab in your open web browser already, add a new API called `/restaurants`.
 
 ![](docs/create-new-api-1.png)
@@ -230,6 +251,8 @@ Add some text to the `summary` and `description` fields.
 At this point, you have an API displaying in the Swagger editor, but it doesn't do anything.  If you use the Swagger editor to try it out, you'll just get an error.
 
 In order for your REST API to do something interesting, you need to wire it to a controller.  The Swagger spec defines an `operationId` field, and the swagger-node project has extended the Swagger spec to also include a reference to the controller via the `x-swagger-router-controller` field.
+
+## Exercise 
 
 [item]: # (slide)
 Add the following to your Swagger file:
@@ -315,7 +338,130 @@ definitions:
 
 # Step 7: Deploying into Docker
 
+You may have heard of Docker before.  In general, Docker is a way to run an application on a system in a "container".  This means that you can package all of your application and its dependencies into a logical grouping.  Containers are different from a VM in that they don't include another kernel within the container.  Your application is interacting with the kernel of the computer you are running it on.
+
+## Exercise
+
+This exercise assumes you reviewed the prerequisites, and installed the Docker runtime on your workstation.  In order to package your application and its dependencies into a container, you need to create a `Dockerfile` at the root of the project (e.g., `rest-api-swagger/Dockerfile`).  Then, you will "build" the container and "run" the container.
+
+A `Dockerfile` has several key components and made up of a series of commands.  It's a bit like a batch script in that sense.  
+
+* First, you need to tell Docker from which image you want to inheret.  This saves you the trouble of having to create all of the dependencies by hand.  To do this, you use the `FROM` statement.
+* Then, you will supply a series of additional commands to copy your application and its dependencies into the container.  This will be a combination of `RUN` and `COPY`.
+* You will also need to tell Docker in which directory to look for your app.  To do this, you use the `WORKDIR` statement.
+* If you want to communicate with your application over a known port, you need to use the `EXPOSE` statement.
+* Finally, to run your application (or script), you will use the `CMD` statement.
+
+Copy the following into your own `Dockerfile`:
+
+```
+# Dockerfile
+FROM node:5.11.1
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+
+# Establish where your CMD will execute
+WORKDIR /usr/src/app
+
+# Install app dependencies
+
+# Note: If you were using a build server, you would do this outside of the
+# container, along with tests, and copy the resulting node_modules directory into
+# the container
+
+COPY package.json /usr/src/app/
+RUN npm install
+
+RUN npm install -g swagger
+
+# Bundle app source into the container
+COPY ./api /usr/src/app/api
+COPY ./static /usr/src/app/static
+COPY ./config /usr/src/app/config
+COPY ./app.js /usr/src/app/
+
+EXPOSE 10010
+
+CMD ["node", "app.js"]
+```
+
+Note that we're using `CMD ["node", "app.js"]` as opposed to `CMD ["swagger", "project", "start"]`.  Either option is possible based on the dependencies available in this project.  To run this app in production, it's recommended to use the `node app.js` method to start the app.
+
+## Building
+
+To actually create the container, you need to `build` the container.  Therefore, you will execute the following command:
+
+`docker build -t ciscodevnet/rest-api-swagger:latest .`
+
+```
+$ docker build -t ciscodevnet/rest-api-swagger:latest .
+Sending build context to Docker daemon 21.62 MB
+Step 1 : FROM node:5.11.1
+ ---> 6300cb2bfbd4
+Step 2 : RUN mkdir -p /usr/src/app
+ ---> Using cache
+ ---> 5debad5860e3
+Step 3 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> c4bb661d8b4e
+Step 4 : COPY ./node_modules /usr/src/app/node_modules
+ ---> 1d4cf05a352c
+Removing intermediate container 091973c7c2f0
+Step 5 : COPY ./api /usr/src/app/api
+ ---> 4d0b1f9fcdce
+Removing intermediate container aa5dfc98f47b
+Step 6 : COPY ./config /usr/src/app/config
+ ---> 10f29df9826f
+Removing intermediate container 4dc514fa2b38
+Step 7 : COPY ./app.js /usr/src/app/
+ ---> 2eb107679e2b
+Removing intermediate container 42bb3f8c557e
+Step 8 : EXPOSE 10010
+ ---> Running in 87700f63405f
+ ---> fc0956d4defc
+Removing intermediate container 87700f63405f
+Step 9 : CMD node app.js
+ ---> Running in a457c180a38a
+ ---> 40b0c52b1e35
+Removing intermediate container a457c180a38a
+Successfully built 40b0c52b1e35
+```
+
+## Running
+
+Once you've successfully created the container, now you can (finally) run it!
+
+`docker run --rm --name swagger-default	ciscodevnet/rest-api-swagger:latest`
+
+You should be able to view the result by opening:
+
+`http://localhost:8080/restaurants`
+
+## Stopping
+
+To stop your container, open another terminal window, and execute the `docker stop` command.
+
+`docker stop swagger-default`
+
+[item]: # (slide)
+## Step 7 Summary
+
+* Created a `Dockerfile`
+* Learned about `docker run`, `docker stop`
+
+[item]: # (/slide)
+
 # Step 8: Bonus: Docker Makefile
+
+
+
+[item]: # (slide)
+## Step 8 Summary
+
+* 
+
+[item]: # (/slide)
 
 # Go do it Exercises
 
