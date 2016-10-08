@@ -22,6 +22,12 @@ This tutorial expects a Unix-like system, however where possible alternatives ha
 
 [item]: # (/slide)
 
+# Source code
+
+Source code is available for you as a resource as you work through this tutorial.  You can clone the repository using the following command: `git clone <repo>`.
+
+Once you have cloned the repository, in subsequent steps, instructions will be provided at the end of the instructions for you to checkout a portion of the code project that corresponds to the material in the step.  This can help you "catch up" in certain sections if you get behind or stuck.  
+
 # Step 0: Installing Prerequisites
 
 We're going to use the [NodeJS](https://nodejs.org) environment to build our project.  However, we're not going to build the application from scratch, but instead use a few frameworks to speed up the process.  Frameworks are common in application development to remove a lot of the boilerplate code that you might write over-and-over again.  In particular, this project will leverage the [swagger-node](https://github.com/swagger-api/swagger-node) project, which itself uses a web application framework called [expressjs](https://expressjs.com).
@@ -90,6 +96,9 @@ Focusing our attention on `controllers` and `swagger`:
 * `swagger` directory
 
 [item]: # (/slide)
+
+## Help
+If you are stuck, you can use `git checkout -b step2 step2` to reset the project in the right place.
 
 [item]: # (slide)
 # Step 3: Run the project
@@ -244,6 +253,9 @@ Add some text to the `summary` and `description` fields.
 
 [item]: # (/slide)
 
+## Help
+If you are stuck, you can use `git checkout -b step5 step5` to reset the project in the right place.
+
 [item]: # (slide)
 # Step 6: Wiring up the controller
 [item]: # (/slide)
@@ -335,6 +347,9 @@ definitions:
 * Added object definitions to Swagger file
 
 [item]: # (/slide)
+
+## Help
+If you are stuck, you can use `git checkout -b step6 step6` to reset the project in the right place.
 
 # Step 7: Deploying into Docker
 
@@ -452,21 +467,85 @@ To stop your container, open another terminal window, and execute the `docker st
 
 [item]: # (/slide)
 
+## Help
+If you are stuck, you can use `git checkout -b step7 step7` to reset the project in the right place.
+
 # Step 8: Bonus: Docker Makefile
 
+It can be tiresome to remember the `docker` commands and syntax.  Creating a `Makefile`, can help remove some of the typos and mundane activites as you work through a project like this.  With a `Makefile`, you can simply type `make` or `make run` in order to build and run your project, respectively.
+
+## Exercises
+
+Create a new file called `Makefile` in the root of the project directory.
+
+In the `Makefile` contents below, notice that there are a few variables that are set at the top in all caps.  These variable names are mostly taken from the Docker nomenclature for Docker Registries and documentation:
+
+* `NS`: stands for namespace
+* `VERSION`: you can set the version of the container that is created or started
+* `REPO`: The container repo name
+* `NAME`: The shorthand name of the container
+* `INSTANCE`: An instance name for the container (not totally necessary, but included for more advanced use cases)
+* `PORTS`: The port flag that sets which maps the exposed port to the port on your workstation
+
+
+```
+NS = ciscodevnet
+VERSION ?= latest
+
+REPO = rest-api-swagger
+NAME = swagger
+INSTANCE = default
+PORTS = -p 8080:10010
+
+.PHONY: build push shell run start stop rm release
+
+build:
+	docker build -t $(NS)/$(REPO):$(VERSION) .
+
+push:
+	docker push $(NS)/$(REPO):$(VERSION)
+
+shell:
+	docker run --rm --name $(NAME)-$(INSTANCE) -i -t $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(REPO):$(VERSION) /bin/bash
+
+run:
+	docker run --rm --name $(NAME)-$(INSTANCE) $(LINK) $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(REPO):$(VERSION)
+
+start:
+	docker run -d --name $(NAME)-$(INSTANCE) $(PORTS) $(LINK) $(VOLUMES) $(ENV) $(NS)/$(REPO):$(VERSION)
+
+stop:
+	docker stop $(NAME)-$(INSTANCE)
+
+rm:
+	docker rm $(NAME)-$(INSTANCE)
+
+release: build
+	make push -e VERSION=$(VERSION)
+
+default: build
+
+```
+
+The `default` make command is to execute `docker build`.  The difference between `make run` and `make start` is that `make start` will daemonize the container, so that it will be running in the background.  The `make shell` command will execute your container, but drop you into the bash shell.  This is very useful for troubleshooting your container via the command line.  You can execute typical bash commands like `ls -l`, check for the existence of environment variables, or run your app manually.
+
+## Environment Variables
+
+It's possible (and highly recommended if you're following the 12factor app patterns) to pass environment variables into your container when it is loaded.  You can do this with the `-e` flag.  If you find yourself using many environment variables, it is more convenient in your development environment to create a file on your workstation containing all of your environment variables.  The format is quite simple, where you define all of your dev environment variables in the standard key-value format (KEY=variable).  You can then use the `--env-file` flag to pass in your environment variables into the container at runtime (`--env-file=./my-vars`).  In the `Makefile`, you can set the `ENV` variable then to `--env-file=./<yourfile>`.
 
 
 [item]: # (slide)
 ## Step 8 Summary
 
-* 
+* Learned about how a `Makefile` provides convenience to dev process
+* Learned about `Makefile` variables
+* Learned about how to pass environment variables and an environment variable file to the `docker` commands
 
 [item]: # (/slide)
 
-# Go do it Exercises
+# Go Do It Exercises
 
 * The API doesn't have a notion of persistance.  Using the mongoose ORM, try to add database connectivity to the application.
-* 
 
 
 # Links to Explore
