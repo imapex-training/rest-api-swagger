@@ -1,7 +1,6 @@
-## Step 2: Summary
+# Step 4: Understand the project and development process
 
-* Learned about the `swagger-node` project
-* Learned about the project layout
-* `controllers` directory
-* `swagger` directory
+* Learn about the basics of a Swagger file
+* Learn about YAML
+* Learn about `paths` and `definitions` sections
 

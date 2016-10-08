@@ -28,9 +28,9 @@ Source code is available for you as a resource as you work through this tutorial
 
 Once you have cloned the repository, in subsequent steps, instructions will be provided at the end of the instructions for you to checkout a portion of the code project that corresponds to the material in the step.  This can help you "catch up" in certain sections if you get behind or stuck.  
 
-You can check out any point of the tutorial using `git checkout -b step? step?`
+You can check out any point of the tutorial using `git checkout -b step? step?`.
 
-To see the changes which between any two lessons use the `git diff command`. `git diff step-?..step-?`
+To see the changes which between any two lessons use the `git diff command`. `git diff step-?..step-?`.
 
 # Step 0: Installing Prerequisites
 
@@ -42,28 +42,44 @@ We're going to use the [NodeJS](https://nodejs.org) environment to build our pro
 
 [item]: # (slide)
 # Step 1: Create swagger-node project
+
+* Install the swagger-node dependencies
+* Create swagger-node project
+* Initialize `git` repository
+
 [item]: # (/slide)
 
+## Exercise
+
 * `$ npm install -g swagger`: Installs the swagger framework globally
+
+**If you cloned the repository from git, you can skip these steps:**
+
 * `$ swagger project create rest-api-swagger`: Scaffolds the entire project in a newly created `rest-api-swagger` directory
 * `$ cd rest-api-swagger`
 * `$ git init`: Initialize the git repo for this project
 
+
 [item]: # (slide)
 # Step 2: Exploring the project layout
+
+* Learn about the `swagger-node` project
+* Learn about the project layout
+* `controllers` directory
+* `swagger` directory
+
 [item]: # (/slide)
 
-Swagger-node will create a template project for you to fill in the gaps.  Observe that there is an `api` directory, that contains folders for `controllers`, `helpers`, `mocks`, `swagger`, and others.
+## Exercise
 
-Focusing our attention on `controllers` and `swagger`:
+Swagger-node will create a template project, which you can then customize to your needs.  Observe that there is an `api` directory, that contains folders for `controllers`, `helpers`, `mocks`, `swagger`, and others.
 
-[item]: # (slide)
+For the purposes of this tutorial, let's focus our attention on `controllers` and `swagger`:
 
 * `controllers`: ExpressJS is a Model-View-Controller web framework.  The Controller is basically the business logic for the app, where the View is what you ultimately consume as a web page, and Model defines the objects that would be referenced in your View and Controller.  In short, the Controller is somewhat like the glue between the Model and View.
 
 * `swagger`: This directory holds the `swagger.yaml` file, which provides the definition for your REST API.  We will manipulate this file quite a bit using the Swagger Editor.
 
-[item]: # (/slide)
 
 ```
 ├── README.md
@@ -91,15 +107,6 @@ Focusing our attention on `controllers` and `swagger`:
             └── README.md
 ```
 
-[item]: # (slide)
-## Step 2: Summary
-
-* Learned about the `swagger-node` project
-* Learned about the project layout
-* `controllers` directory
-* `swagger` directory
-
-[item]: # (/slide)
 
 ## Help
 If you are stuck, you can use `git checkout -b step2 step2` to reset the project in the right place.
@@ -107,7 +114,13 @@ If you are stuck, you can use `git checkout -b step2 step2` to reset the project
 [item]: # (slide)
 # Step 3: Run the project
 
+* Learn about the `swagger-node` project and CLI
+* `swagger project start`
+* `swagger project edit`
 
+[item]: # (/slide)
+
+## Swagger-node CLI
 Swagger-node provides convenient CLI commands to help you run the project, edit the Swagger file using swagger editor, and test your API.
 
 ```
@@ -120,7 +133,6 @@ Swagger-node provides convenient CLI commands to help you run the project, edit 
     generate-test [options] [directory]  Generate the test template
 ```
 
-[item]: # (/slide)
 
 ## Exercise
 
@@ -151,17 +163,14 @@ Do not terminate this process or close this window until finished editing.
 
 ![Editor](docs/editor.png)
 
-[item]: # (slide)
-## Step 3: Summary
-
-* Learned about the `swagger-node` project
-* `swagger project start`
-* `swagger project edit`
-
-[item]: # (/slide)
 
 [item]: # (slide)
 # Step 4: Understand the project and development process
+
+* Learn about the basics of a Swagger file
+* Learn about YAML
+* Learn about `paths` and `definitions` sections
+
 [item]: # (/slide)
 
 [item]: # (slide)
@@ -172,41 +181,27 @@ Do not terminate this process or close this window until finished editing.
 
 It's important to realize that the Swagger file is the focal point of the process.  You are working in an API-definition-first model, and adding business logic to your code as a result of what you define in the Swagger file.
 
-[item]: # (slide)
 ## Swagger file details
-[item]: # (/slide)
+
 In order to effectively work with the Swagger definition, it's useful to know more about the relevant parts of the file.  If you want to learn about all of the possible options in an OpenAPI specification, you can go [here](http://swagger.io/specification/).  OpenAPI files can be in JSON or [YAML format](http://yaml.org).  The format that we will work in is YAML.  If you're not familiar with YAML, it's a key-value based file format that is easy to read for humans.
 
-[item]: # (slide)
 Beginning section: Everything stems from the root "Swagger object".  Before defining the methods of your API, the Swagger file can provide some overall information about your API including: The Swagger version, `info`, `host`, `basePath`, `schemes`, `consumes`, and `produces`.
 
-[item]: # (/slide)
-
-[item]: # (slide)
 `paths` section: This object describes the REST API paths that your application will expose to the world.
 
-[item]: # (/slide)
-[item]: # (slide)
 `definitions` section: This object describes the objects that will be sent into your API methods or returned by your API methods.  It is used by the swagger "middleware" to validate what is being provided to and returned from the API.
 
-[item]: # (/slide)
-
-[item]: # (slide)
-## Step 4: Summary
-
-* Learned about the basics of a Swagger file
-* Learned about YAML
-* Learned about `paths` and `definitions` sections
-
-[item]: # (/slide)
 
 [item]: # (slide)
 # Step 5: Creating a new API
+
+* Learn about the basic elements of adding a path to the Swagger file
+* Add a `/restaurants` path to the Swagger file using snippet
+
 [item]: # (/slide)
 
 Notice that there is an existing endpoint called `/hello`, also called a "path object".  It includes an "operation object" , `get`, which contains two fields: `parameters` and `responses`. 
 
-[item]: # (slide)
 ```
 paths:
   /hello:
@@ -217,7 +212,6 @@ paths:
     	responses:
     		...
 ```
-[item]: # (/slide)
 
 ## Exercise
 
@@ -235,7 +229,6 @@ Start typing the word `get`.  You'll noticed that you are presented with an auto
 
 This is great, however there are a couple of errors to resolve.
 
-[item]: # (slide)
 Add some text to the `summary` and `description` fields.
 
 ```
@@ -247,21 +240,20 @@ Add some text to the `summary` and `description` fields.
         200:
           description: OK
 ```
-[item]: # (/slide)
 
-[item]: # (slide)
-## Step 5: Summary
-
-* Learned about the basic elements of adding a path to the Swagger file
-* Added a `/restaurants` path to the Swagger file using snippet
-
-[item]: # (/slide)
 
 ## Help
 If you are stuck, you can use `git checkout -b step5 step5` to reset the project in the right place.
 
 [item]: # (slide)
 # Step 6: Wiring up the controller
+
+* Add `x-swagger-router-controller: restaurants`
+* Add `operationId: index`
+* Add `api/controllers/restaurants.js`
+* Add `function index({})` to `restaurants.js`
+* Add object definitions to Swagger file
+
 [item]: # (/slide)
 
 At this point, you have an API displaying in the Swagger editor, but it doesn't do anything.  If you use the Swagger editor to try it out, you'll just get an error.
@@ -270,13 +262,10 @@ In order for your REST API to do something interesting, you need to wire it to a
 
 ## Exercise 
 
-[item]: # (slide)
 Add the following to your Swagger file:
 
 * `x-swagger-router-controller: restaurants`
 * `operationId: index`
-
-[item]: # (/slide)
 
 The next step is to create the controller in your project.
 
@@ -341,21 +330,16 @@ definitions:
         type: string 
 ```
 
-[item]: # (slide)
-## Step 6 Summary
-
-* Added `x-swagger-router-controller: restaurants`
-* Added `operationId: index`
-* Added `api/controllers/restaurants.js`
-* Added `function index({})` to `restaurants.js`
-* Added object definitions to Swagger file
-
-[item]: # (/slide)
-
 ## Help
 If you are stuck, you can use `git checkout -b step6 step6` to reset the project in the right place.
 
+[item]: # (slide)
 # Step 7: Deploying into Docker
+
+* Create a `Dockerfile`
+* Learn about `docker run`, `docker stop`
+
+[item]: # (/slide)
 
 You may have heard of Docker before.  In general, Docker is a way to run an application on a system in a "container".  This means that you can package all of your application and its dependencies into a logical grouping.  Containers are different from a VM in that they don't include another kernel within the container.  Your application is interacting with the kernel of the computer you are running it on.
 
@@ -463,18 +447,17 @@ To stop your container, open another terminal window, and execute the `docker st
 
 `docker stop swagger-default`
 
-[item]: # (slide)
-## Step 7 Summary
-
-* Created a `Dockerfile`
-* Learned about `docker run`, `docker stop`
-
-[item]: # (/slide)
-
 ## Help
 If you are stuck, you can use `git checkout -b step7 step7` to reset the project in the right place.
 
+[item]: # (slide)
 # Step 8: Bonus: Docker Makefile
+
+* Learn about how a `Makefile` provides convenience to dev process
+* Learn about `Makefile` variables
+* Learn about how to pass environment variables and an environment variable file to the `docker` commands
+
+[item]: # (/slide)
 
 It can be tiresome to remember the `docker` commands and syntax.  Creating a `Makefile`, can help remove some of the typos and mundane activites as you work through a project like this.  With a `Makefile`, you can simply type `make` or `make run` in order to build and run your project, respectively.
 
@@ -537,27 +520,22 @@ The `default` make command is to execute `docker build`.  The difference between
 
 It's possible (and highly recommended if you're following the 12factor app patterns) to pass environment variables into your container when it is loaded.  You can do this with the `-e` flag.  If you find yourself using many environment variables, it is more convenient in your development environment to create a file on your workstation containing all of your environment variables.  The format is quite simple, where you define all of your dev environment variables in the standard key-value format (KEY=variable).  You can then use the `--env-file` flag to pass in your environment variables into the container at runtime (`--env-file=./my-vars`).  In the `Makefile`, you can set the `ENV` variable then to `--env-file=./<yourfile>`.
 
-
-[item]: # (slide)
-## Step 8 Summary
-
-* Learned about how a `Makefile` provides convenience to dev process
-* Learned about `Makefile` variables
-* Learned about how to pass environment variables and an environment variable file to the `docker` commands
-
-[item]: # (/slide)
-
 ## Help
 If you are stuck, you can use `git checkout -b step8 step8` to reset the project in the right place.
 
+
+[item]: # (slide)
 # Go Do It Exercises
 
 * The API doesn't have a notion of persistance.  Using the mongoose ORM, try to add database connectivity to the application.
 
+[item]: # (/slide)
 
+[item]: # (slide)
 # Links to Explore
 
 * https://swaggerhub.com
+[item]: # (/slide)
 
 # License
 

@@ -1,6 +1,5 @@
-## Step 3: Summary
+# Step 5: Creating a new API
 
-* Learned about the `swagger-node` project
-* `swagger project start`
-* `swagger project edit`
+* Learn about the basic elements of adding a path to the Swagger file
+* Add a `/restaurants` path to the Swagger file using snippet
 

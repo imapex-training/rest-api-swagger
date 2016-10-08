@@ -1,3 +1,5 @@
-![](https://github.com/swagger-api/swagger-node/raw/master/docs/images/overview2.png)
-(Source: Swagger-node project)
+# Step 7: Deploying into Docker
+
+* Create a `Dockerfile`
+* Learn about `docker run`, `docker stop`
 
