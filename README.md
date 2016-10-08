@@ -28,6 +28,10 @@ Source code is available for you as a resource as you work through this tutorial
 
 Once you have cloned the repository, in subsequent steps, instructions will be provided at the end of the instructions for you to checkout a portion of the code project that corresponds to the material in the step.  This can help you "catch up" in certain sections if you get behind or stuck.  
 
+You can check out any point of the tutorial using `git checkout -b step? step?`
+
+To see the changes which between any two lessons use the `git diff command`. `git diff step-?..step-?`
+
 # Step 0: Installing Prerequisites
 
 We're going to use the [NodeJS](https://nodejs.org) environment to build our project.  However, we're not going to build the application from scratch, but instead use a few frameworks to speed up the process.  Frameworks are common in application development to remove a lot of the boilerplate code that you might write over-and-over again.  In particular, this project will leverage the [swagger-node](https://github.com/swagger-api/swagger-node) project, which itself uses a web application framework called [expressjs](https://expressjs.com).
@@ -542,6 +546,9 @@ It's possible (and highly recommended if you're following the 12factor app patte
 * Learned about how to pass environment variables and an environment variable file to the `docker` commands
 
 [item]: # (/slide)
+
+## Help
+If you are stuck, you can use `git checkout -b step8 step8` to reset the project in the right place.
 
 # Go Do It Exercises
 
