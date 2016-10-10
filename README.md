@@ -200,7 +200,7 @@ Beginning section: Everything stems from the root "Swagger object".  Before defi
 
 [item]: # (/slide)
 
-Notice that there is an existing endpoint called `/hello`, also called a "path object".  It includes an "operation object" , `get`, which contains two fields: `parameters` and `responses`. 
+Notice that there is an existing endpoint called `/hello`, also called a "path object".  It includes an "operation object" , `get`, which contains two fields: `parameters` and `responses`.
 
 ```
 paths:
@@ -260,7 +260,7 @@ At this point, you have an API displaying in the Swagger editor, but it doesn't 
 
 In order for your REST API to do something interesting, you need to wire it to a controller.  The Swagger spec defines an `operationId` field, and the swagger-node project has extended the Swagger spec to also include a reference to the controller via the `x-swagger-router-controller` field.
 
-## Exercise 
+## Exercise
 
 Add the following to your Swagger file:
 
@@ -296,7 +296,7 @@ function index(req, res) {
 	    address: 'Via S. Maurilio, 7, 20123 Milano, Italy'
 	}
     ];
-    
+
     res.json(restaurants);
 }
 ```
@@ -327,7 +327,7 @@ definitions:
       name:
         type: string
       address:
-        type: string 
+        type: string
 ```
 
 ## Help
@@ -371,25 +371,26 @@ WORKDIR /usr/src/app
 
 # Note: If you were using a build server, you would do this outside of the
 # container, along with tests, and copy the resulting node_modules directory into
-# the container
+# the container.  Since we are just using our local machines, and already have
+# downloaded the dependencies, we copy them in the next step.
 
-COPY package.json /usr/src/app/
-RUN npm install
-
-RUN npm install -g swagger
+# COPY package.json /usr/src/app/
+# RUN npm install
 
 # Bundle app source into the container
+COPY ./node_modules /usr/src/app/node_modules
 COPY ./api /usr/src/app/api
-COPY ./static /usr/src/app/static
 COPY ./config /usr/src/app/config
 COPY ./app.js /usr/src/app/
 
+# Expose the port for the app
 EXPOSE 10010
 
+# Execute "node app.js"
 CMD ["node", "app.js"]
 ```
 
-Note that we're using `CMD ["node", "app.js"]` as opposed to `CMD ["swagger", "project", "start"]`.  Either option is possible based on the dependencies available in this project.  To run this app in production, it's recommended to use the `node app.js` method to start the app.
+Note that we're using `CMD ["node", "app.js"]` as opposed to `CMD ["swagger", "project", "start"]`.  To run this app in production, it's recommended to use the `node app.js` method to start the app.
 
 ## Building
 
