@@ -1,4 +1,4 @@
-# Step 8: Bonus: Docker Makefile
+## Step 8: Bonus: Docker Makefile
 
 * Learn about how a `Makefile` provides convenience to dev process
 * Learn about `Makefile` variables
