@@ -4,7 +4,7 @@ Representational state transfer (REST) or RESTful web services are arguably the 
 
 Using HTTP, as is most common, the kind of operations available include those predefined by the HTTP verbs GET, POST, PUT, DELETE and so on. By making use of a stateless protocol and standard operations REST systems aim for fast performance, reliability, and the ability to grow, by using reusable components that can be managed and updated without affecting the system as a whole, even while it is running.
 
-have a look at good old wikipedia for a ton more info: [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).
+Have a look at good old wikipedia for a ton more info: [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).
 
 There are a number of methods and supporting tools to create REST based APIs.
 
@@ -276,7 +276,7 @@ In order for your REST API to do something interesting, you need to wire it to a
 
 ### Exercise
 
-To specifiy the controller and controller operation our API will use, add the following to your API definition in the swagger file:
+To specify the controller and controller operation our API will use, add the following to your API definition in the swagger file:
 
 * As the first child item of our `/restaurants` API tag, add the new tag and value `x-swagger-router-controller: restaurants`
 * As a child item of the `get` tag, after the `description` tag, add the new tag and value `operationId: index`
@@ -296,7 +296,7 @@ paths:
 
 The next step is to create the controller file in your swagger project that we just pointed our API toward.
 
-Within your project (`rest-api-swagger`), create a file named `restaurants.js` under the path `api/controllers/`. This will be our controller file for our API.
+Within your project (`rest-api-swagger`), create a file named (via temimal or your favourite text editor) `restaurants.js` under the path `api/controllers/`. This will be our controller file for our API.
 
 Open our controller file `restaurants.js` in a text editor.  
 
@@ -512,6 +512,8 @@ Once you've successfully created the container, you can run the app inside the c
 
 To do this, use this command:
 
+_Note: Ensure that if you already have docker configured, that DOCKER_CONTENT_TRUST in the docker configuration file is not set._
+
 `docker run --rm --name swagger-default -p 8080:10010	ciscodevnet/rest-api-swagger:latest`
 
 The `-p 8080:10010` flag is mapping the port that you exposed in the Dockerfile (`10010`) to your workstation's port `8080`.
@@ -531,9 +533,13 @@ Awesome!!!
 
 ### Stopping
 
-To stop your container, open another terminal window, and execute the `docker stop` command.
+To stop your container, open another terminal window, and execute the `docker stop` command:
 
 `docker stop swagger-default`
+
+To then remove your container, execute the `docker remove` command:
+
+`docker rm swagger-default`
 
 [item]: # (slide)
 ## Step 8: Bonus Round! Docker Makefile
@@ -548,7 +554,7 @@ It can be tiresome to remember the `docker` commands and syntax.  Creating a `Ma
 
 ### Exercises
 
-Create a new file called `Makefile` in the root of the project directory.
+Create a new file called `Makefile` in the root of the project directory (e.g. in the folder `rest-api-swagger`).
 
 In the `Makefile` contents below, notice that there are a few variables that are set at the top in all caps.  These variable names are mostly taken from the Docker nomenclature for Docker Registries and documentation:
 
@@ -559,7 +565,7 @@ In the `Makefile` contents below, notice that there are a few variables that are
 * `INSTANCE`: An instance name for the container (not totally necessary, but included for more advanced use cases)
 * `PORTS`: The port flag that sets which maps the exposed port to the port on your workstation
 
-**Note: You may need to manually insert the `Makefile` indents after each command definition as tabs (E.g. after the start of the next line after 'build:', remove spaces and add tab instead, if required - do for all similar lines) after you copy/paste from below.**
+**Note: You will need to manually insert the `Makefile` indents to be tabs rather than spaces after each command definition (E.g. after the start of the next line after 'build:' for example - do the same for all similar lines after a command definition) after you copy/paste from below.**
 
 ```
 NS = ciscodevnet
