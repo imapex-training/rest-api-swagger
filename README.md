@@ -43,9 +43,11 @@ However, we're not going to build the application from scratch, instead we'll us
 Let's install the pre-reqs:
 
 * Install [nvm (node version manager)](https://github.com/creationix/nvm).  Windows users can use: [nvm-windows](https://github.com/coreybutler/nvm-windows)
-* Install NodeJS using the command `nvm install node`. This will automatically install npm (node package manager), that we'll use next.
+  * If using windows execute command: `nvm use 6.9.1`
+* If on Mac OS, install NodeJS using the command `nvm install node`. This will automatically install npm (node package manager), that we'll use next.
+  * If using windows, you'll need to execute command: `nvm install latest`
 * Install [swagger-node](https://github.com/swagger-api/swagger-node) using `npm install -g swagger`.
-* Install [Docker for Mac](https://docs.docker.com/engine/installation/mac/) or [Docker for Windows](https://docs.docker.com/engine/installation/windows/) by downloading the the relevant version for your machine and following the instructions.
+* Install [Docker for Mac](https://docs.docker.com/engine/installation/mac/) or [Docker for Windows](https://docs.docker.com/engine/installation/windows/) *and toolbox* by downloading the the relevant version for your machine and following the instructions.
 
 [item]: # (slide)
 ## Step 1: Build our swagger-node project
@@ -465,6 +467,8 @@ Note that we're using `CMD ["node", "app.js"]` as opposed to `CMD ["swagger", "p
 To actually create the container, you need to `build` the container using your Dockerfile.  You do this by executing the following command in the base directory of our swagger project:
 
 `docker build -t ciscodevnet/rest-api-swagger:latest .`
+
+*Note* In windows, the command may need to be updated to: `docker build ./ --tag ciscodevnet/rest-api-swagger:latest .`
 
 This builds our container with the name `ciscodevnet/rest-api-swagger` and tagging it `latest`, which refers to the latest version of this container.
 
