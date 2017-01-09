@@ -1,6 +1,7 @@
 ---
 input_file: ./README.md
 output_directory: ./slides
+output_filename: slide
 reveal:
   template:
   template_color: FFFFFF

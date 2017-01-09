@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: rest-api-swagger
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: rest-api-swagger
+    spec:
+      containers:
+      - name: rest-api-swagger
+        image: ciscodevnet/rest-api-swagger:latest
+        ports:
+        - containerPort: 10010
