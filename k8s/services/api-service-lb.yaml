@@ -1,3 +1,6 @@
+# Create the service by executing
+# $ kubectl apply -f k8s/services/api-service-lb.yaml
+
 kind: Service
 apiVersion: v1
 metadata:

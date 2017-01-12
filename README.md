@@ -475,6 +475,8 @@ In the `Makefile` contents below, notice that there are a few variables that are
 * `INSTANCE`: An instance name for the container (not totally necessary, but included for more advanced use cases)
 * `PORTS`: The port flag that sets which maps the exposed port to the port on your workstation
 
+** You will need to ensure that you are using TABs in the Makefile for indention **
+** Otherwise, you will get errors. **
 
 ```
 NS = ciscodevnet
