@@ -627,6 +627,9 @@ function indexMean(req, res) {
 * The `module.exports` object contents have been updated to reflect the new `indexMean` function name.
 * `function indexMean(req, req)` now corresponds to our definition in the Swagger file.
 
+## Help
+If you are stuck, you can use `git checkout -b step9 step9` to reset the project in the right place.
+
 # Download and Run MongoDB
 
 Run the project (`swagger project start`).  You will see an error.  That's because we don't have a MongoDB up and running.
@@ -733,6 +736,9 @@ Explaining the code:
 
 
 With the Swagger Editor running navigate on the page to the `GET /restaurants-mean` endpoint.  Click on the "Try this operation" button.  Scroll down and click on the "Send Request" button, the app will return an empty array (e.g., `[]`).
+
+## Help
+If you are stuck, you can use `git checkout -b step10 step10` to reset the project in the right place.
 
 # Adding Data Into The Database
 

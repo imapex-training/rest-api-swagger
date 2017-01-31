@@ -1,5 +1,6 @@
 'use strict'
 
+var Restaurants = require('./restaurants.model');
 
 module.exports = {
     indexMean: indexMean
@@ -7,16 +8,8 @@ module.exports = {
 
 function indexMean(req, res) {
 
-    var restaurants = [
-	{
-	    name: 'Bar Americano',
-	    address: '20 Presgrave Pl, Melbourne VIC 3000, Australia'
-	},
-	{
-	    name: 'Ronchi 78',
-	    address: 'Via S. Maurilio, 7, 20123 Milano, Italy'
-	}
-    ];
-
-    res.json(restaurants);
+  Restaurants.find(function (err, contents) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(contents);
+  });
 }
