@@ -29,6 +29,17 @@ paths:
           description: An array of restaurants
           schema:
             $ref: "#/definitions/Restaurants"
+  /restaurants-mean:
+    x-swagger-router-controller: restaurants.mean
+    get:
+      summary: Displays all of the restaurants available from Mongo
+      description: Displays all of the restaurants available.  These restaurants are fantastic.
+      operationId: indexMean
+      responses:
+        200:
+          description: An array of restaurants
+          schema:
+            $ref: "#/definitions/Restaurants"
   /hello:
     # binds a127 app logic to a route
     x-swagger-router-controller: hello_world
