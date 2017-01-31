@@ -866,6 +866,9 @@ Locate the `GET /restaurants` section in the Swagger Editor.  Click on "Try Oper
 ]
 ```
 
+## Help
+If you are stuck, you can use `git checkout -b step11 step11` to reset the project in the right place.
+
 # Summary
 
 In Part 1, we created a basic REST API using the swagger-node project.  We also packaged it as a container and learned about using a Makefile to make our lives easier when dealing with the Docker CLI.
