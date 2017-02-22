@@ -436,13 +436,11 @@ Successfully built 40b0c52b1e35
 
 ## Running
 
-Once you've successfully created the container, now you can (finally) run it!
+Once you've successfully created the container, now you can (finally) run it! Please note you need to map the port defined in the EXPOSE statement from the Dockerfile, to a port in the host (in this case we will use host port 8080).
 
-`docker run --rm --name swagger-default	ciscodevnet/rest-api-swagger:latest`
+`docker run -p 8080:10010 -d --name swagger-default ciscodevnet/rest-api-swagger:latest`
 
-You should be able to view the result by opening:
-
-`http://localhost:8080/restaurants`
+You should be able to view the result by opening `http://localhost:8080/restaurants` in a browser, or running the command `curl http://127.0.0.1:8080/restaurants` from a terminal window.
 
 ## Stopping
 
