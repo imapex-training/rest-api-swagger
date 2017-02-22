@@ -4,8 +4,8 @@ The purpose of this tutorial is to help the reader understand a method to quickl
 
 ## Link to Slides:
 
-[Part 1](http://rawgit.com/imapex-training/rest-api-swagger/master/slides/index.html#/)
-[Part 2](http://rawgit.com/imapex-training/rest-api-swagger/master/slides/index.html#/13)
+[Part 1](http://rawgit.com/imapex-training/rest-api-swagger/master/slides/slide.html#/)
+[Part 2](http://rawgit.com/imapex-training/rest-api-swagger/master/slides/slide.html#/13)
 
 ## Windows Users
 
@@ -556,8 +556,11 @@ During this section, you will find it useful to have multiple terminal tabs open
 [item]: # (slide)
 Duplicate the existing restaurants controller, and name the new file `restaurants.mean.js`.
 
-`$ cd api/controllers`
-`$ cp restaurants.js restaurants.mean.js`
+```
+$ cd api/controllers
+$ cp restaurants.js restaurants.mean.js
+```
+
 [item]: # (/slide)
 
 [item]: # (slide)
@@ -660,11 +663,16 @@ There are many options for running an instance of MongoDB.  In this tutorial, we
 To download the [Mongo container](https://hub.docker.com/_/mongo/), use the Docker CLI.  First go to one of the other tabs in your terminal.
 
 [item]: # (slide)
-`$ docker pull mongo`
+```
+$ docker pull mongo
+```
 
 To run the container we just pulled, and run it in daemon mode (`-d`):
 
-`$ docker run --name restaurants -p 27017:27017 -d mongo`
+```
+$ docker run --name restaurants -p 27017:27017 -d mongo
+```
+
 [item]: # (/slide)
 
 You can check to see if the container is running by typing:
@@ -746,7 +754,9 @@ We have to refactor the `restaurants.mean.js` controller to interact with MongoD
 
 Import the model near the top of the file (Line 3):
 
-`var Restaurants = require('./restaurants.model');`
+```
+var Restaurants = require('./restaurants.model');
+```
 
 Replace the contents of the `indexMean` function with the following:
 
