@@ -2,6 +2,11 @@
 
 The purpose of this tutorial is to help the reader understand a method to quickly create a REST API, and to understand the process of creating an API starting first with the API definintion.  We will use the Swagger definition language (aka the [OpenAPI Specification](http://swagger.io/specification/)) in this tutorial.
 
+## Link to Slides:
+
+[Part 1](http://rawgit.com/imapex-training/rest-api-swagger/master/slides/index.html#/)
+[Part 2](http://rawgit.com/imapex-training/rest-api-swagger/master/slides/index.html#/13)
+
 ## Windows Users
 
 This tutorial expects a Unix-like system, however where possible alternatives have been identified for Windows-based systems.  The Windows paths are less tested than the Unix-like paths.
@@ -540,17 +545,22 @@ If you are stuck, you can use `git checkout -b step8 step8` to reset the project
 * https://swaggerhub.com
 [item]: # (/slide)
 
+[item]: # (slide)
 # Part 2: Adding persistence with MongoDB
+[item]: # (/slide)
 
 During this section, you will find it useful to have multiple terminal tabs open at once.  You should open three tabs to this project's directory.
 
 # Upgrading The Project
 
+[item]: # (slide)
 Duplicate the existing restaurants controller, and name the new file `restaurants.mean.js`.
 
 `$ cd api/controllers`
 `$ cp restaurants.js restaurants.mean.js`
+[item]: # (/slide)
 
+[item]: # (slide)
 In the `app.js`, you need to add the Mongoose ODM (Object Document Mapper) package.
 
 Insert at line 6:
@@ -577,6 +587,7 @@ db.once('open', function() {
   console.log("DB Connected");
 });
 ```
+[item]: # (/slide)
 
 If you try to run the project, you'll be faced with an error, `Error: Cannot find module 'mongoose'`.  This is because we have not yet installed the dependency in our project.  To do that, you can use `npm`.  Execute `npm install mongoose --save`.  The `--save` portion of the command will add it to your `package.json`, which enables another user or system do know which dependencies are part of this project.
 
@@ -584,6 +595,7 @@ If you try to run the project, you'll be faced with an error, `Error: Cannot fin
 
 If not already open, open the Swagger editor: `swagger project edit`.  This will open a browser window for you to manipulate and preview your changes as you move along.
 
+[item]: # (slide)
 At Line 32 in the `swagger.yaml`, add a new route.
 
 ```
@@ -600,6 +612,7 @@ At Line 32 in the `swagger.yaml`, add a new route.
         schema:
           $ref: "#/definitions/Restaurants"
 ```
+[item]: # (/slide)
 
 Exploring adjustments to the Swagger above:
 
@@ -608,6 +621,7 @@ Exploring adjustments to the Swagger above:
 
 It's also necessary to make some adjustments in the `restaurants.mean.js` controller:
 
+[item]: # (slide)
 ```
 // restaurants.mean.js
 
@@ -621,6 +635,7 @@ function indexMean(req, res) {
 
 ...
 ```
+[item]: # (/slide)
 
 * The `module.exports` object contents have been updated to reflect the new `indexMean` function name.
 * `function indexMean(req, req)` now corresponds to our definition in the Swagger file.
@@ -630,6 +645,7 @@ If you are stuck, you can use `git checkout -b step9 step9` to reset the project
 
 # Download and Run MongoDB
 
+[item]: # (slide)
 Run the project (`swagger project start`).  You will see an error.  That's because we don't have a MongoDB up and running.
 
 ```
@@ -637,16 +653,19 @@ connection error: { [MongoError: failed to connect to server [localhost:27071] o
   name: 'MongoError',
   message: 'failed to connect to server [localhost:27071] on first connect' }
 ```
+[item]: # (/slide)
 
 There are many options for running an instance of MongoDB.  In this tutorial, we're going to run Mongo inside a Docker container.
 
 To download the [Mongo container](https://hub.docker.com/_/mongo/), use the Docker CLI.  First go to one of the other tabs in your terminal.
 
+[item]: # (slide)
 `$ docker pull mongo`
 
 To run the container we just pulled, and run it in daemon mode (`-d`):
 
 `$ docker run --name restaurants -p 27017:27017 -d mongo`
+[item]: # (/slide)
 
 You can check to see if the container is running by typing:
 
@@ -659,6 +678,7 @@ b08274879bdc        mongo               "/entrypoint.sh mo..."   3 days ago     
 
 In the same terminal tab, start the project:
 
+[item]: # (slide)
 ```
 $ cd rest-api-swagger
 $ swagger project start
@@ -668,7 +688,9 @@ Starting: /Users/ashleyroach/src/rest-api-swagger/app.js...
   to restart at any time, enter `rs`
 DB Connected
 ```
+[item]: # (/slide)
 
+[item]: # (slide)
 Using the Swagger Editor already open in your browser, locate the `GET /restaurants-mean` path, and click on the "Try Operation" button followed by "Send Request".
 
 You should see the result:
@@ -676,17 +698,23 @@ You should see the result:
 ```
 [{"name":"Bar Americano","address":"20 Presgrave Pl, Melbourne VIC 3000, Australia"},{"name":"Ronchi 78","address":"Via S. Maurilio, 7, 20123 Milano, Italy"}]
 ```
+[item]: # (/slide)
 
 At this point, the app is functional, connecting to the database, but because we copied our original file as a starting point, the app is not yet using the database.  To start leveraging the database, we need to write some code using the Mongoose package we installed earlier.
 
+[item]: # (slide)
 # Wiring Up Mongoose
+[item]: # (/slide)
 
 Mongoose requires that you define a `model` of your data (aka documents) that will be stored in MongoDB.  Create the file `api/controllers/restaurants.model.js`.  
 
+[item]: # (slide)
 ```
 $ touch api/controllers/restaurants.model.js
 ```
+[item]: # (/slide)
 
+[item]: # (slide)
 Insert the following into that file:
 
 ```
@@ -708,10 +736,12 @@ var RestaurantSchema = new Schema({
 
 module.exports = mongoose.model('Restaurant', RestaurantSchema);
 ```
+[item]: # (/slide)
 
 * This code defines a `Schema` that Mongoose will use to move data in and out of your database.
 * The `new Schema()` block defines the elements needed to tell Mongoose what it should expect when a `Restaurant` object is sent to it.
 
+[item]: # (slide)
 We have to refactor the `restaurants.mean.js` controller to interact with MongoDB.
 
 Import the model near the top of the file (Line 3):
@@ -726,6 +756,7 @@ Restaurants.find(function (err, contents) {
   return res.status(200).json(contents);
 });
 ```
+[item]: # (/slide)
 
 Explaining the code:
 
@@ -738,7 +769,9 @@ With the Swagger Editor running navigate on the page to the `GET /restaurants-me
 ## Help
 If you are stuck, you can use `git checkout -b step10 step10` to reset the project in the right place.
 
+[item]: # (slide)
 # Adding Data Into The Database
+[item]: # (/slide)
 
 To initially seed the database, we can create a script that will load upon startup and insert some dummy data into MongoDB.  But, better yet, let's update the `/restaurants-mean` endpoint to accept the HTTP method `POST`.  
 
@@ -775,6 +808,7 @@ post:
 
 To complete the `post:` method in the Swagger definition file, it's necessary to provide the `operationId` and the `parameters` that will be submitted to the API.
 
+[item]: # (slide)
 ```
 post:
   summary: Create a new restaurant entry
@@ -793,12 +827,14 @@ post:
       schema:
         $ref: "#/definitions/Restaurant"
 ```
+[item]: # (/slide)
 
 * The `operationId` maps to the the function definition in the controller (`createMean`).
 * To tell the Swagger system what data to expect, we define a `parameters` block that contains `in: body` -- meaning that the object will be submitted in the body of the request -- and the `schema` is defined as the `Restaurant` object we defined earlier in this project.
 
 Next, we'll implement the `createMean` method in the controller.
 
+[item]: # (slide)
 Add a new function in the controller.
 
 ```
@@ -825,6 +861,7 @@ function createMean(req, res) {
   });
 }
 ```
+[item]: # (/slide)
 
 Exploring the code above:
 
