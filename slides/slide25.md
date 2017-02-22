@@ -2,7 +2,9 @@ We have to refactor the `restaurants.mean.js` controller to interact with MongoD
 
 Import the model near the top of the file (Line 3):
 
-`var Restaurants = require('./restaurants.model');`
+```
+var Restaurants = require('./restaurants.model');
+```
 
 Replace the contents of the `indexMean` function with the following:
 
