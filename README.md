@@ -4,8 +4,8 @@ The purpose of this tutorial is to help the reader understand a method to quickl
 
 ## Link to Slides:
 
-[Part 1](http://rawgit.com/imapex-training/rest-api-swagger/master/slides/slide.html#/)
-[Part 2](http://rawgit.com/imapex-training/rest-api-swagger/master/slides/slide.html#/13)
+* [Part 1](http://rawgit.com/imapex-training/rest-api-swagger/master/slides/slide.html#/)
+* [Part 2](http://rawgit.com/imapex-training/rest-api-swagger/master/slides/slide.html#/13)
 
 ## Windows Users
 
@@ -919,6 +919,14 @@ If you are stuck, you can use `git checkout -b step11 step11` to reset the proje
 In Part 1, we created a basic REST API using the swagger-node project.  We also packaged it as a container and learned about using a Makefile to make our lives easier when dealing with the Docker CLI.
 
 In Part 2, our basic project expanded to include the ability to persist data that is submitted to the REST API.  We used MongoDB as the database and Mongoose to connect from our swagger-node project.
+
+# Workstation reset
+
+The following script is used at events organized by Cisco DevNet.  
+
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/imapex-training/rest-api-swagger/master/tools/workstation-reset.sh)"
+```
 
 # License
 
