@@ -1,9 +1,10 @@
 #!/usr/bin/env sh
 
-git fetch origin
-git checkout master
-git reset --hard origin/master
-git branch -d step8
+cd ~/workspace/ashley
+rm -rf rest-api-swagger
+git clone https://github.com/CiscoDevNet/rest-api-swagger.git
+
+git checkout -b step8 step8
 
 docker stop restaurants
 docker rm restaurants
