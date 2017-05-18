@@ -1,3 +1,6 @@
-![](https://github.com/swagger-api/swagger-node/raw/master/docs/images/overview2.png)
-(Source: Swagger-node project)
+# Step 1: Create swagger-node project
+
+* Install the swagger-node dependencies
+* Create swagger-node project
+* Initialize `git` repository
 

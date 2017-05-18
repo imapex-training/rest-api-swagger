@@ -1,5 +1,16 @@
-# Step 5: Creating a new API
+## Step 1: Exercise
 
-* Learn about the basic elements of adding a path to the Swagger file
-* Add a `/restaurants` path to the Swagger file using snippet
+```
+swagger project create rest-api-swagger
+Framework?
+  connect
+> express
+  hapi
+  restify
+  sails
+```
+```
 
+cd rest-api-swagger
+git init
+```

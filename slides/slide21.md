@@ -1,7 +1,5 @@
-Using the Swagger Editor already open in your browser, locate the `GET /restaurants-mean` path, and click on the "Try Operation" button followed by "Send Request".
+# Step 5: Creating a new API
 
-You should see the result:
+* Learn about the basic elements of adding a path to the Swagger file
+* Add a `/restaurants` path to the Swagger file using snippet
 
-```
-[{"name":"Bar Americano","address":"20 Presgrave Pl, Melbourne VIC 3000, Australia"},{"name":"Ronchi 78","address":"Via S. Maurilio, 7, 20123 Milano, Italy"}]
-```

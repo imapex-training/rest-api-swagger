@@ -1,8 +1,7 @@
-# Step 6: Wiring up the controller
+# Step 2: Exploring the project layout
 
-* Add `x-swagger-router-controller: restaurants`
-* Add `operationId: index`
-* Add `api/controllers/restaurants.js`
-* Add `function index({})` to `restaurants.js`
-* Add object definitions to Swagger file
+* Learn about the `swagger-node` project
+* Learn about the project layout
+* `controllers` directory
+* `swagger` directory
 

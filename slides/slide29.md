@@ -1,3 +1,4 @@
+Add the following to your Swagger file:
 
-## Thank you!
-
+* `x-swagger-router-controller: restaurants`
+* `operationId: index`

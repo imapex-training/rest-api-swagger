@@ -1,21 +1,3 @@
-Insert the following into that file:
+Once you have added the `path` named `/restaurants:`, hit RETURN, and then TAB.  
 
-```
-'use strict';
-
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
-
-var RestaurantSchema = new Schema({
-  name: {
-  	type: String,
-  	required: true
-  },
-  address: {
-  	type: String,
-  	required: true
-  }
-});
-
-module.exports = mongoose.model('Restaurant', RestaurantSchema);
-```
+![](docs/create-new-api-2.png)

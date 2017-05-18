@@ -1,9 +1,1 @@
-```
-$ cd rest-api-swagger
-$ swagger project start
-Starting: /Users/ashleyroach/src/rest-api-swagger/app.js...
-  project started here: http://localhost:10010/
-  project will restart on changes.
-  to restart at any time, enter `rs`
-DB Connected
-```
+![](docs/swagger2.png) <!-- .element height="50%" width="50%" -->

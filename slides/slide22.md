@@ -1,1 +1,10 @@
-# Wiring Up Mongoose
+```
+paths:
+  /hello:
+    get:
+    		...
+    	parameters:
+    		...
+    	responses:
+    		...
+```

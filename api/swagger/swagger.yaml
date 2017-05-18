@@ -56,6 +56,9 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Restaurant"
+  /health
+    get:
+    
   /hello:
     # binds a127 app logic to a route
     x-swagger-router-controller: hello_world

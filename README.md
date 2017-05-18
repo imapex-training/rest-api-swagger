@@ -37,7 +37,9 @@ You can check out any point of the tutorial using `git checkout -b step? step?`.
 
 To see the changes which between any two lessons use the `git diff command`. `git diff step-?..step-?`.
 
+[item]: # (slide)
 # Part 1: Defining and Containerizing a REST API
+[item]: # (/slide)
 
 # Step 0: Installing Prerequisites
 
@@ -48,6 +50,32 @@ We're going to use the [NodeJS](https://nodejs.org) environment to build our pro
 * Install [Docker for Mac](https://docs.docker.com/engine/installation/mac/) or [Docker for Windows](https://docs.docker.com/engine/installation/windows/)
 
 [item]: # (slide)
+# Installing Prerequisites
+[item]: # (/slide)
+
+[item]: # (slide)
+## Install NVM and Node
+```console
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+```
+
+Restart your terminal
+
+```console
+nvm install --lts
+```
+[item]: # (/slide)
+
+[item]: # (slide)
+## Install swagger-node project
+
+```
+npm install -g swagger
+```
+[item]: # (/slide)
+
+
+[item]: # (slide)
 # Step 1: Create swagger-node project
 
 * Install the swagger-node dependencies
@@ -56,16 +84,24 @@ We're going to use the [NodeJS](https://nodejs.org) environment to build our pro
 
 [item]: # (/slide)
 
-## Exercise
+[item]: # (slide)
+## Step 1: Exercise
 
-* `$ npm install -g swagger`: Installs the swagger framework globally
+```
+swagger project create rest-api-swagger
+Framework?
+  connect
+> express
+  hapi
+  restify
+  sails
+```
+```
 
-**If you cloned the repository from git, you can skip these steps:**
-
-* `$ swagger project create rest-api-swagger`: Scaffolds the entire project in a newly created `rest-api-swagger` directory
-* `$ cd rest-api-swagger`
-* `$ git init`: Initialize the git repo for this project
-
+cd rest-api-swagger
+git init
+```
+[item]: # (/slide)
 
 [item]: # (slide)
 # Step 2: Exploring the project layout
@@ -87,7 +123,7 @@ For the purposes of this tutorial, let's focus our attention on `controllers` an
 
 * `swagger`: This directory holds the `swagger.yaml` file, which provides the definition for your REST API.  We will manipulate this file quite a bit using the Swagger Editor.
 
-
+[item]: # (slide)
 ```
 ├── README.md
 ├── api
@@ -113,22 +149,25 @@ For the purposes of this tutorial, let's focus our attention on `controllers` an
         └── helpers
             └── README.md
 ```
-
+[item]: # (/slide)
 
 ## Help
 If you are stuck, you can use `git checkout -b step2 step2` to reset the project in the right place.
 
 [item]: # (slide)
 # Step 3: Run the project
-
-* Learn about the `swagger-node` project and CLI
-* `swagger project start`
-* `swagger project edit`
-
 [item]: # (/slide)
 
+[item]: # (slide)
 ## Swagger-node CLI
+[item]: # (/slide)
+
 Swagger-node provides convenient CLI commands to help you run the project, edit the Swagger file using swagger editor, and test your API.
+
+[item]: # (slide)
+```
+swagger
+```
 
 ```
     create [options] [name]              Create a folder containing a Swagger project
@@ -139,15 +178,28 @@ Swagger-node provides convenient CLI commands to help you run the project, edit 
     test [options] [directory_or_file]   Run project tests
     generate-test [options] [directory]  Generate the test template
 ```
+[item]: # (/slide)
 
-
+[item]: # (slide)
+<!-- .slide: style="text-align: left;"> -->  
 ## Exercise
 
 * Open another terminal windows or tab
 * In the new terminal, change to the project directory
-* Execute the command `swagger project start`
-* In the first terminal window, execute the command `swagger project edit`
 
+### Terminal 1
+
+```
+swagger project start
+```
+
+### Terminal 2
+```
+swagger project edit
+```
+[item]: # (/slide)
+
+[item]: # (slide)
 In the window where you entered the command `swagger project start`, you should see console output:
 
 ```
@@ -159,6 +211,9 @@ try this:
 curl http://127.0.0.1:10010/hello?name=Scott
 
 ```
+[item]: # (/slide)
+
+[item]: # (slide)
 
 In the window where you entered the command `swagger project edit`, you should see this console output, and your browser should have loaded the editor.
 
@@ -167,9 +222,11 @@ Starting Swagger Editor.
 Opening browser to: http://127.0.0.1:50391/#/edit
 Do not terminate this process or close this window until finished editing.
 ```
+[item]: # (/slide)
 
+[item]: # (slide)
 ![Editor](docs/editor.png)
-
+[item]: # (/slide)
 
 [item]: # (slide)
 # Step 4: Understand the project and development process
@@ -188,7 +245,9 @@ Do not terminate this process or close this window until finished editing.
 
 It's important to realize that the Swagger file is the focal point of the process.  You are working in an API-definition-first model, and adding business logic to your code as a result of what you define in the Swagger file.
 
+[item]: # (slide)
 ## Swagger file details
+[item]: # (/slide)
 
 In order to effectively work with the Swagger definition, it's useful to know more about the relevant parts of the file.  If you want to learn about all of the possible options in an OpenAPI specification, you can go [here](http://swagger.io/specification/).  OpenAPI files can be in JSON or [YAML format](http://yaml.org).  The format that we will work in is YAML.  If you're not familiar with YAML, it's a key-value based file format that is easy to read for humans.
 
@@ -198,6 +257,9 @@ Beginning section: Everything stems from the root "Swagger object".  Before defi
 
 `definitions` section: This object describes the objects that will be sent into your API methods or returned by your API methods.  It is used by the swagger "middleware" to validate what is being provided to and returned from the API.
 
+[item]: # (slide)
+![](docs/swagger2.png) <!-- .element height="50%" width="50%" -->
+[item]: # (/slide)
 
 [item]: # (slide)
 # Step 5: Creating a new API
@@ -209,6 +271,7 @@ Beginning section: Everything stems from the root "Swagger object".  Before defi
 
 Notice that there is an existing endpoint called `/hello`, also called a "path object".  It includes an "operation object" , `get`, which contains two fields: `parameters` and `responses`.
 
+[item]: # (slide)
 ```
 paths:
   /hello:
@@ -219,25 +282,35 @@ paths:
     	responses:
     		...
 ```
+[item]: # (/slide)
 
 ## Exercise
 
+[item]: # (slide)
 Let's add a new API.  In the Swagger editor, which should be a tab in your open web browser already, add a new API called `/restaurants`.
 
 ![](docs/create-new-api-1.png)
+[item]: # (/slide)
 
+[item]: # (slide)
 Once you have added the `path` named `/restaurants:`, hit RETURN, and then TAB.  
 
 ![](docs/create-new-api-2.png)
+[item]: # (/slide)
 
+[item]: # (slide)
 Start typing the word `get`.  You'll noticed that you are presented with an autocomplete option.  Hit TAB to autocomplete the snippet.
 
 ![](docs/create-new-api-3.png)
+[item]: # (/slide)
 
 This is great, however there are a couple of errors to resolve.
 
+[item]: # (slide)
 Add some text to the `summary` and `description` fields.
+[item]: # (/slide)
 
+[item]: # (slide)
 ```
   /restaurants:
     get:
@@ -247,6 +320,7 @@ Add some text to the `summary` and `description` fields.
         200:
           description: OK
 ```
+[item]: # (/slide)
 
 
 ## Help
@@ -269,21 +343,40 @@ In order for your REST API to do something interesting, you need to wire it to a
 
 ## Exercise
 
+[item]: # (slide)
 Add the following to your Swagger file:
 
 * `x-swagger-router-controller: restaurants`
 * `operationId: index`
+[item]: # (/slide)
 
+[item]: # (slide)
+```
+paths:
+  /restaurants:
+    x-swagger-router-controller: restaurants
+    get:
+      summary: Displays all of the restaurants available
+      description: Displays all of the restaurants available.  These restaurants are fantastic.
+      operationId: index
+      responses:
+        200:
+          description: An array of restaurants
+```
+[item]: # (/slide)
+
+[item]: # (slide)
 The next step is to create the controller in your project.
 
 In the terminal, and within your project (`rest-api-swagger`), create a file named `restaurants.js` in the path `api/controllers/`.
+[item]: # (/slide)
 
 Open `restaurants.js` in a text editor.  Recall that in the Swagger file, there were two fields: `x-swagger-router-controller` and `operationId`.  We've already created the controller file, now we need to complete the `operationId`.  Since the value of the `operationId` corresponds to `index`, we need to add a function called `index` in `restaurants.js`.
 
+[item]: # (slide)
 Copy the content below into `restaurants.js`.
 
-
-```
+```javascript
 'use strict'
 
 
@@ -307,13 +400,19 @@ function index(req, res) {
     res.json(restaurants);
 }
 ```
+[item]: # (/slide)
 
+[item]: # (slide)
 If you try to execute the API, however, you'll receive an error in your terminal:
 
-`Error: Response validation failed: void does not allow a value`
+```
+Error: Response validation failed: void does not allow a value
+```
 
 This is because our Swagger file does not include a definition for the resulting object, and so it's rejecting the result.
+[item]: # (/slide)
 
+[item]: # (slide)
 To address this, we must define a schema definition for the restaurants object the `index` is sending back to the server.
 
 ```
@@ -336,6 +435,14 @@ definitions:
       address:
         type: string
 ```
+[item]: # (/slide)
+
+[item]: # (slide)
+### Success!
+
+![](docs/request-success.png)
+
+[item]: # (/slide)
 
 ## Help
 If you are stuck, you can use `git checkout -b step6 step6` to reset the project in the right place.
