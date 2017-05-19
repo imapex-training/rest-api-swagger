@@ -1,13 +1,7 @@
+## Stopping
+
+To stop your container, open another terminal window, and execute the `docker stop` command.
+
 ```
-// restaurants.mean.js
-
-...
-
-module.exports = {
-    indexMean: indexMean
-};
-
-function indexMean(req, res) {
-
-...
+docker stop swagger-default
 ```

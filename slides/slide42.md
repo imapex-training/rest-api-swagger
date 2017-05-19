@@ -1,26 +1,7 @@
-In the `app.js`, you need to add the Mongoose ODM (Object Document Mapper) package.
+## Running
 
-Insert at line 6:
+Once you've successfully created the container, now you can (finally) run it! Please note you need to map the port defined in the EXPOSE statement from the Dockerfile, to a port in the host (in this case we will use host port 8080).
 
 ```
-// Use the Mongoose ORM for modeling your objects in MongoDB
-var mongoose = require('mongoose');
-
-// Declare the database connection
-var db = mongoose.connection;
-
-// If no MONGO environment variable exists, default to localhost
-if (!process.env.MONGO) {
-  process.env.MONGO = "mongodb://localhost:27017/restaurants";
-}
-
-// Connect to the database using the environment variable
-// process.env.MONGO
-mongoose.connect(process.env.MONGO);
-
-// Listen for events from Mongoose
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log("DB Connected");
-});
+docker run -p 8080:10010 -d --name swagger-default {yourDockerName}/rest-api-swagger:latest
 ```

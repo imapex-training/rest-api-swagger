@@ -1,6 +1,5 @@
-# Step 8: Bonus: Docker Makefile
+## Exercise
 
-* Learn about how a `Makefile` provides convenience to dev process
-* Learn about `Makefile` variables
-* Learn about how to pass environment variables and an environment variable file to the `docker` commands
-
+* This exercise assumes you reviewed the prerequisites, and installed the Docker runtime on your workstation.
+* In order to package your application and its dependencies into a container, you need to create a `Dockerfile` at the root of the project (e.g., `rest-api-swagger/Dockerfile`).  
+* Then, you will "build" the container and "run" the container.

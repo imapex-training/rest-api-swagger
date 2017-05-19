@@ -1,16 +1,3 @@
-At Line 32 in the `swagger.yaml`, add a new route.
+You should be able to view the result by opening `http://localhost:8080/restaurants` in a browser, or running the command `curl http://127.0.0.1:8080/restaurants` from a terminal window.
 
-```
-# swagger.yaml
-/restaurants-mean:
-  x-swagger-router-controller: restaurants.mean
-  get:
-    summary: Displays all of the restaurants available from Mongo
-    description: Displays all of the restaurants available.  These restaurants are fantastic.
-    operationId: indexMean
-    responses:
-      200:
-        description: An array of restaurants
-        schema:
-          $ref: "#/definitions/Restaurants"
-```
+![](docs/docker-success.png)

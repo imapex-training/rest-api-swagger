@@ -1,7 +1,6 @@
-Run the project (`swagger project start`).  You will see an error.  That's because we don't have a MongoDB up and running.
+# Step 8: Bonus: Docker Makefile
 
-```
-connection error: { [MongoError: failed to connect to server [localhost:27071] on first connect]
-  name: 'MongoError',
-  message: 'failed to connect to server [localhost:27071] on first connect' }
-```
+* Learn about how a `Makefile` provides convenience to dev process
+* Learn about `Makefile` variables
+* Learn about how to pass environment variables and an environment variable file to the `docker` commands
+

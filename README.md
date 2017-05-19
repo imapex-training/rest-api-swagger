@@ -47,7 +47,7 @@ We're going to use the [NodeJS](https://nodejs.org) environment to build our pro
 
 * Install NodeJS using [nvm (node version manager)](https://github.com/creationix/nvm).  Windows users can use: [nvm-windows](https://github.com/coreybutler/nvm-windows)
 * Install [swagger-node](https://github.com/swagger-api/swagger-node)
-* Install [Docker for Mac](https://docs.docker.com/engine/installation/mac/) or [Docker for Windows](https://docs.docker.com/engine/installation/windows/)
+* Install [Docker for Mac](https://docs.docker.com/engine/installation/mac/) or [Docker for Windows](https://docs.docker.com/engine/installation/windows/) or [Docker for Linux ](https://docs.docker.com/engine/installation/linux/ubuntu/)
 
 [item]: # (slide)
 # Installing Prerequisites
@@ -457,63 +457,70 @@ If you are stuck, you can use `git checkout -b step6 step6` to reset the project
 
 You may have heard of Docker before.  In general, Docker is a way to run an application on a system in a "container".  This means that you can package all of your application and its dependencies into a logical grouping.  Containers are different from a VM in that they don't include another kernel within the container.  Your application is interacting with the kernel of the computer you are running it on.
 
+[item]: # (slide)
 ## Exercise
 
-This exercise assumes you reviewed the prerequisites, and installed the Docker runtime on your workstation.  In order to package your application and its dependencies into a container, you need to create a `Dockerfile` at the root of the project (e.g., `rest-api-swagger/Dockerfile`).  Then, you will "build" the container and "run" the container.
+* This exercise assumes you reviewed the prerequisites, and installed the Docker runtime on your workstation.
+* In order to package your application and its dependencies into a container, you need to create a `Dockerfile` at the root of the project (e.g., `rest-api-swagger/Dockerfile`).  
+* Then, you will "build" the container and "run" the container.
+[item]: # (/slide)
 
 A `Dockerfile` has several key components and made up of a series of commands.  It's a bit like a batch script in that sense.  
 
-* First, you need to tell Docker from which image you want to inheret.  This saves you the trouble of having to create all of the dependencies by hand.  To do this, you use the `FROM` statement.
+* First, you need to tell Docker from which image you want to inherit.  This saves you the trouble of having to create all of the dependencies by hand.  To do this, you use the `FROM` statement.
 * Then, you will supply a series of additional commands to copy your application and its dependencies into the container.  This will be a combination of `RUN` and `COPY`.
 * You will also need to tell Docker in which directory to look for your app.  To do this, you use the `WORKDIR` statement.
 * If you want to communicate with your application over a known port, you need to use the `EXPOSE` statement.
 * Finally, to run your application (or script), you will use the `CMD` statement.
 
-Copy the following into your own `Dockerfile`:
+[item]: # (slide)
+### Create a `Dockerfile`
+
+In the root of the project:
 
 ```
-# Dockerfile
+touch Dockerfile
+```
+[item]: # (/slide)
+
+[item]: # (slide)
+### Copy the following into your own `Dockerfile`:
+
+```
 FROM node:5.11.1
 
-# Create app directory
 RUN mkdir -p /usr/src/app
 
-# Establish where your CMD will execute
 WORKDIR /usr/src/app
 
-# Install app dependencies
-
-# Note: If you were using a build server, you would do this outside of the
-# container, along with tests, and copy the resulting node_modules directory into
-# the container.  Since we are just using our local machines, and already have
-# downloaded the dependencies, we copy them in the next step.
-
-# COPY package.json /usr/src/app/
-# RUN npm install
-
-# Bundle app source into the container
 COPY ./node_modules /usr/src/app/node_modules
 COPY ./api /usr/src/app/api
 COPY ./config /usr/src/app/config
 COPY ./app.js /usr/src/app/
 
-# Expose the port for the app
 EXPOSE 10010
 
-# Execute "node app.js"
 CMD ["node", "app.js"]
 ```
+[item]: # (/slide)
 
 Note that we're using `CMD ["node", "app.js"]` as opposed to `CMD ["swagger", "project", "start"]`.  To run this app in production, it's recommended to use the `node app.js` method to start the app.
 
+[item]: # (slide)
 ## Building
 
 To actually create the container, you need to `build` the container.  Therefore, you will execute the following command:
 
-`docker build -t ciscodevnet/rest-api-swagger:latest .`
+```
+docker build -t {yourDockerName}/rest-api-swagger:latest .
+```
+[item]: # (/slide)
+
+[item]: # (slide)
+### Example Output:
 
 ```
-$ docker build -t ciscodevnet/rest-api-swagger:latest .
+$ docker build -t {yourDockerName}/rest-api-swagger:latest .
 Sending build context to Docker daemon 21.62 MB
 Step 1 : FROM node:5.11.1
  ---> 6300cb2bfbd4
@@ -545,20 +552,33 @@ Step 9 : CMD node app.js
 Removing intermediate container a457c180a38a
 Successfully built 40b0c52b1e35
 ```
+[item]: # (/slide)
 
+[item]: # (slide)
 ## Running
 
 Once you've successfully created the container, now you can (finally) run it! Please note you need to map the port defined in the EXPOSE statement from the Dockerfile, to a port in the host (in this case we will use host port 8080).
 
-`docker run -p 8080:10010 -d --name swagger-default ciscodevnet/rest-api-swagger:latest`
+```
+docker run -p 8080:10010 -d --name swagger-default {yourDockerName}/rest-api-swagger:latest
+```
+[item]: # (/slide)
 
+[item]: # (slide)
 You should be able to view the result by opening `http://localhost:8080/restaurants` in a browser, or running the command `curl http://127.0.0.1:8080/restaurants` from a terminal window.
 
+![](docs/docker-success.png)
+[item]: # (/slide)
+
+[item]: # (slide)
 ## Stopping
 
 To stop your container, open another terminal window, and execute the `docker stop` command.
 
-`docker stop swagger-default`
+```
+docker stop swagger-default
+```
+[item]: # (/slide)
 
 ## Help
 If you are stuck, you can use `git checkout -b step7 step7` to reset the project in the right place.
